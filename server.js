@@ -1,5 +1,5 @@
 const express = require('express');
-const passport = require('./config-passport');
+const passportConfig = require('./passport-config');
 
 // Create a new Express application.
 const app = express();
@@ -15,31 +15,23 @@ app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({extended: true}));
 app.use(require('express-session')({secret: 'keyboard cat', resave: false, saveUninitialized: false}));
 
-// Initialize Passport and restore authentication state, if any, from the
-// session.
-app.use(passport.initialize());
-app.use(passport.session());
+passportConfig(app);
 
 // Define routes.
-app.get('/', function (req, res) {
-  res.render('home', {user: req.user});
-});
+app.get('/',
+    function (req, res) {
+      res.render('home', {user: req.user});
+    });
 
-app.get('/login', function (req, res) {
-  res.render('login');
-});
+app.get('/login',
+    function (req, res) {
+      res.render('login');
+    });
 
-app.post('/login', passport.authenticate('local', {failureRedirect: '/login'}), function (req, res) {
-  res.redirect('/');
-});
-
-app.get('/logout', function (req, res) {
-  req.logout();
-  res.redirect('/');
-});
-
-app.get('/profile', require('connect-ensure-login').ensureLoggedIn(), function (req, res) {
-  res.render('profile', {user: req.user});
-});
+app.get('/profile',
+    require('connect-ensure-login').ensureLoggedIn(),
+    function (req, res) {
+      res.render('profile', {user: req.user});
+    });
 
 app.listen(3000);

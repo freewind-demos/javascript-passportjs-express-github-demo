@@ -1,26 +1,75 @@
-This example demonstrates how to use [Express](http://expressjs.com/) 4.x and
-[Passport](http://passportjs.org/) to authenticate users using a username and
-password with [form-based authentication](https://en.wikipedia.org/wiki/HTTP%2BHTML_form-based_authentication).
-Use this example as a starting point for your own web applications.
+JavaScript PassportJS Express Github Demo
+=========================================
 
-## Instructions
+获取github oauth2 keys:
+---------------------
 
-To install this example on your computer, clone the repository and install
-dependencies.
+https://github.com/settings/applications/new
 
-```bash
-$ git clone git@github.com:passport/express-4.x-local-example.git
-$ cd express-4.x-local-example
-$ npm install
+![demo1](./images/demo1.jpg)
+
+![demo2](./images/demo2.jpg)
+
+然后修改`passport-config.js`中:
+
+```
+const GITHUB_CLIENT_ID = '???';
+const GITHUB_CLIENT_SECRET = '???';
 ```
 
-Start the server.
+运行：
+---
 
-```bash
-$ node server.js
+```
+npm install
+npm run demo
 ```
 
-Open a web browser and navigate to [http://localhost:3000/](http://127.0.0.1:3000/)
-to see the example in action.  Log in using username `jack` and password `secret`.
+retrieved profile is like:
 
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/vK9dyjRnnWsMzzJTQ57fRJpH/passport/express-4.x-local-example'>  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/vK9dyjRnnWsMzzJTQ57fRJpH/passport/express-4.x-local-example.svg' /></a>
+```
+{ id: '333781',
+  displayName: '???',
+  username: 'freewind',
+  profileUrl: 'https://github.com/freewind',
+  photos:
+   [ { value: 'https://avatars1.githubusercontent.com/u/333781?v=4' } ],
+  provider: 'github',
+  _raw:
+   '{"login":"freewind","id":333781,"node_id":"MDQ6VXNlcjMzMzc4MQ==","avatar_url":"https://avatars1.githubusercontent.com/u/333781?v=4","gravatar_id":"","url":"https://api.github.com/users/freewind","html_url":"https://github.com/freewind","followers_url":"https://api.github.com/users/freewind/followers","following_url":"https://api.github.com/users/freewind/following{/other_user}","gists_url":"https://api.github.com/users/freewind/gists{/gist_id}","starred_url":"https://api.github.com/users/freewind/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/freewind/subscriptions","organizations_url":"https://api.github.com/users/freewind/orgs","repos_url":"https://api.github.com/users/freewind/repos","events_url":"https://api.github.com/users/freewind/events{/privacy}","received_events_url":"https://api.github.com/users/freewind/received_events","type":"User","site_admin":false,"name":null,"company":null,"blog":"","location":null,"email":null,"hireable":null,"bio":null,"public_repos":284,"public_gists":76,"followers":172,"following":64,"created_at":"2010-07-16T07:19:20Z","updated_at":"2018-09-09T14:34:07Z"}',
+  _json:
+   { login: 'freewind',
+     id: 333781,
+     node_id: 'MDQ6VXNlcjMzMzc4MQ==',
+     avatar_url: 'https://avatars1.githubusercontent.com/u/333781?v=4',
+     gravatar_id: '',
+     url: 'https://api.github.com/users/freewind',
+     html_url: 'https://github.com/freewind',
+     followers_url: 'https://api.github.com/users/freewind/followers',
+     following_url:
+      'https://api.github.com/users/freewind/following{/other_user}',
+     gists_url: 'https://api.github.com/users/freewind/gists{/gist_id}',
+     starred_url:
+      'https://api.github.com/users/freewind/starred{/owner}{/repo}',
+     subscriptions_url: 'https://api.github.com/users/freewind/subscriptions',
+     organizations_url: 'https://api.github.com/users/freewind/orgs',
+     repos_url: 'https://api.github.com/users/freewind/repos',
+     events_url: 'https://api.github.com/users/freewind/events{/privacy}',
+     received_events_url: 'https://api.github.com/users/freewind/received_events',
+     type: 'User',
+     site_admin: false,
+     name: null,
+     company: null,
+     blog: '',
+     location: null,
+     email: null,
+     hireable: null,
+     bio: null,
+     public_repos: 284,
+     public_gists: 76,
+     followers: 172,
+     following: 64,
+     created_at: '2010-07-16T07:19:20Z',
+     updated_at: '2018-09-09T14:34:07Z' } }
+
+```
